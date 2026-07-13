@@ -10,35 +10,29 @@
     --card-foreground: 222 47% 11%;
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
-    --primary: 158 84% 39%;        /* #10B881 */
+    --primary: 142 71% 45%;        /* #22C55E */
     --primary-foreground: 0 0% 100%;
     --secondary: 210 40% 96%;
     --secondary-foreground: 222 47% 11%;
     --muted: 210 40% 96%;
     --muted-foreground: 215 16% 47%;
-    --accent: 158 60% 95%;
-    --accent-foreground: 158 84% 25%;
+    --accent: 142 60% 95%;
+    --accent-foreground: 142 71% 25%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 158 84% 39%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 158 84% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.875rem;
+    --border: 220 14% 92%;
+    --input: 220 14% 92%;
+    --ring: 142 71% 45%;
+    --radius: 1rem;
   }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
+  * { @apply border-border; }
   body {
     @apply bg-[#F5F7FA] text-foreground antialiased;
     font-family: var(--font-jakarta, 'Plus Jakarta Sans', system-ui, sans-serif);
+    -webkit-tap-highlight-color: transparent;
   }
   h1, h2, h3, h4, h5 {
     font-family: var(--font-poppins, 'Poppins', system-ui, sans-serif);
@@ -46,20 +40,33 @@
 }
 
 @layer utilities {
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .safe-area-bottom {
-    padding-bottom: env(safe-area-inset-bottom, 0px);
-  }
-  .font-poppins {
-    font-family: var(--font-poppins, 'Poppins', system-ui, sans-serif);
-  }
-  .font-jakarta {
-    font-family: var(--font-jakarta, 'Plus Jakarta Sans', system-ui, sans-serif);
-  }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .safe-area-bottom { padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .font-poppins { font-family: var(--font-poppins, 'Poppins', system-ui, sans-serif); }
+  .font-jakarta { font-family: var(--font-jakarta, 'Plus Jakarta Sans', system-ui, sans-serif); }
+
+  /* Soft card shadow - matches reference */
+  .shadow-card { box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06); }
+  .shadow-card-hover { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.10); }
+  .shadow-fab { box-shadow: 0 6px 24px rgba(34, 197, 94, 0.40); }
 }
+
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.animate-slide-up  { animation: slideUpFade 0.28s cubic-bezier(0.22,1,0.36,1) both; }
+.animate-scale-in  { animation: scaleIn   0.22s cubic-bezier(0.22,1,0.36,1) both; }
+.animate-fade-in   { animation: fadeIn    0.25s ease-out both; }
+
+/* Stagger utility — add [animation-delay:Xms] inline */
